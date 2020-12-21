@@ -1,3 +1,4 @@
+/** Construir la tabla principal */
 crearTabla=(numColum)=>{
     let tabla="<button class='btn btn-danger' id='btnBorrarDatos'>Borrar datos</button><table class='tablaComidas' id='tablaComidas'><tr><td id='celdaBlanco'></td>";
     let diasSemana=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
@@ -29,7 +30,7 @@ crearTabla=(numColum)=>{
 }
 
 /**
- * 
+ * Caja para buscar una comida
  */
 $("#cajaBuscar").keyup(function(e){
     let caja=$("#cajaBuscar").val();
@@ -79,7 +80,7 @@ $("#cajaBuscar").keyup(function(e){
     }
 });
 
-
+/**Imprimir Tabla */
 $("#btnObtenerComidas").click(function(e){
     if ((document.getElementById('comida0').innerText)==""){
         let numeroMostrar=0;
@@ -119,6 +120,7 @@ $("#btnObtenerComidas").click(function(e){
     }
 });
 
+/**Insertar en la base de datos */
 $("#btnInsertar").click(function(e){
     let comida=document.getElementById('cajaInsertar').value;
     let tipoInsertar=document.getElementById("tipoComidaInsertar").value;
