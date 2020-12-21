@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--HEAD-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+        </script><!--JQuery-->
+        <link rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+            crossorigin="anonymous"><!--Bootstrap-->
+        <link href="estilos.css"
+              rel="stylesheet"><!--Css mio-->
+        <title>App Comida</title><!--Titulo-->
+    </head>
+    <!--BODY-->
+    <body>
+        <!--HEADER-->
+        <header class="row">
+            <div class="col-4 cajaHeader"><!--Caja imagen-->
+                <img src="img/alimentos.jpg" class="imgCom">
+            </div>
+            <div class="col-8 cajaHeader"><!--Caja buscador-->
+                <div class="buscador">
+                    <input type="search" class="cajaBuscar" id="cajaBuscar" name="cajaBuscar" autocomplete="off"><!--Buscador-->
+                    <!--<button id="btnBuscar" class="btnBuscar btn-dark btn"> Boton buscar
+                        Mostrar todo
+                    </button>-->
+                </div>
+            </div>
+        </header>
+        <!--CAJA AGREGAR-->
+        <div class="row cajaAgregar">
+            <div class="col-10 cajaFormInsertar"><!--Caja formulario-->
+                <h2 class="tituloInsertar">Agregar comidas</h2>
+                    <label for="cajaInsertar" class="etiqInsertar"><!--Etiqueta nombre comida-->
+                        Escribe un nuevo alimento: 
+                    </label>
+                    <input type="text" class="cajaInsertar" id="cajaInsertar" autocomplete="off"><!--Escribir nombre comida-->
+                    <select class="seleccionarTipo" id="tipoComidaInsertar"><!--Seleccionar tipo comida-->
+                        <option disabled="disabled" value="" selected>Selecciona el tipo de comida</option>
+                        <option value="comida">Comida</option>
+                        <option value="cena">Cena</option>
+                    </select>
+                    <button id="btnInsertar" class="btnInsertar btn-info btn"><!--Boton agregar--> 
+                        Agregar
+                    </button>
+            </div>
+        </div>
+        <input type="hidden" id="numTabla">
+        <!--Caja obtener comidas-->
+        <div class="row">
+            <!--Caja tablas-->
+            <br>
+            <h2 class="tituloTablas">Obtener comidas</h2>
+            <br>
+            <div class="col-12 tabla" id="tabla">
+                <!--Tabla de la semana-->
+            </div>
+            <div class="col-6 cajaBotonesTabla">
+                <h4>Añadir días a la tabla</h4>        
+                <button id="btnMas" class="btnTabla btn btn-info">
+                    +
+                </button>
+                <button id="btn-" class="btnTabla btn btn-info"> 
+                    -
+                </button>
+            </div>
+            <div class="col-6 cajaBotonObtener">       
+                <button id="btnObtenerComidas" class="btnObtenerComidas btn btn-info">
+                    Obtener comidas y cenas
+                </button>
+            </div>
+            <div class="mostrar" id="mostrarBusqueda">
+                <h1>COMIDAS</h1>
+                <ul id="mostrarComidas">
+
+                </ul>
+                <ul id="mostrarCenas">
+
+                </ul>
+                <h1>CENAS</h1>
+            </div>
+        </div>
+        <!--CAJA PAR MOSTRAR TODAS LAS COMIDAS
+        <div class="todasLasComidas" id="todasLasComidas">
+            <button id="cerrarTodo" class="cerrarTodo">X</button>
+        </div>-->
+
+        <!--JAVASCRIPTS-->
+        <script src="js.js"></script>
+        <script>
+            $(document).ready(function() {
+                let numColum=5;
+                document.getElementById("tabla").innerHTML+=crearTabla(numColum);
+                $("#btnMas").click(function(){
+                    if (numColum<7){
+                        numColum++;
+                        document.getElementById("tabla").innerHTML=crearTabla(numColum);
+                    }
+                 });
+
+                $("#btn-").click(function(){
+                    if (numColum>1){
+                        numColum--;
+                        document.getElementById("tabla").innerHTML=crearTabla(numColum);
+                    }
+                });
+
+                $("#btnBorrarDatos").click(function(e){
+                    let numCol=parseInt(document.getElementById("numTabla").value);
+                    for(let j=0;j<2;j++){
+                        let contCena=0;
+                        for(let k=0;k<numCol;k++){
+                            switch(j){
+                                case 0:
+                                    document.getElementById("comida"+k).innerHTML="";
+                                break;
+                                case 1:
+                                    document.getElementById("cena"+contCena).innerHTML="";
+                                    contCena++;
+                                break;
+                            }
+                        }
+                    }
+                });
+               /*$("#cerrarTodo").click(function(){
+                    $("#todasLasComidas").css(
+                    {
+                        "visibility": "hidden"
+                    }
+                )
+                });
+                $("#btnBuscar").click(function(){
+                    $("#todasLasComidas").css(
+                    {
+                        "visibility": "visible"
+                    }
+                )
+                });*/
+            });
+        </script>
+    </body>
+</html>
